@@ -36,10 +36,28 @@ function App() {
     }
   }
 
+  function handleFavourite(selectedShoe: Shoe) {
+    const newShoes: Shoe[] = shoes.map((shoe) => {
+      if (selectedShoe.name === shoe.name) {
+        return {
+          ...shoe,
+          isFav: !selectedShoe.isFav,
+        };
+      } else {
+        return shoe;
+      }
+    });
+    setShoes(newShoes);
+  }
+
   return (
     <>
       {shoes.map((shoe) => (
-        <ShoeComponent shoe={shoe} addShoeToCart={addShoeToCart} />
+        <ShoeComponent
+          shoe={shoe}
+          addShoeToCart={addShoeToCart}
+          handleFavourite={handleFavourite}
+        />
       ))}
       <CartComponent cart={cart} setCart={setCart} />
     </>

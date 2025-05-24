@@ -32,7 +32,6 @@ export default function CartItemComponent(props: Props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">fav</Button>
         <Button size="small" onClick={() => handleRemoveItemFromCart(item)}>
           Remove
         </Button>

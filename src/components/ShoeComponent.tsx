@@ -7,11 +7,12 @@ import type { Shoe } from "../types/Shoe.type";
 
 type Props = {
   shoe: Shoe;
-  addShoeToCart(newShoe: Shoe): void
+  addShoeToCart(newShoe: Shoe): void;
+  handleFavourite(selectedShoe: Shoe): void;
 };
 
 export default function ShoeComponent(props: Props) {
-  const { shoe, addShoeToCart } = props;
+  const { shoe, addShoeToCart, handleFavourite } = props;
   const { brand, name, price, isFav } = shoe;
 
   return (
@@ -28,8 +29,18 @@ export default function ShoeComponent(props: Props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">fav</Button>
-        <Button size="small" onClick={() => addShoeToCart(shoe)}>Add</Button>
+        {isFav ? (
+          <Button size="small" onClick={() => handleFavourite(shoe)}>
+            favourite
+          </Button>
+        ) : (
+          <Button size="small" onClick={() => handleFavourite(shoe)}>
+            +
+          </Button>
+        )}
+        <Button size="small" onClick={() => addShoeToCart(shoe)}>
+          Add
+        </Button>
       </CardActions>
     </Card>
   );
