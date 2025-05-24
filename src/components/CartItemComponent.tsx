@@ -1,18 +1,19 @@
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import type { Shoe } from "../types/Shoe.type";
+import type { CartItem } from "../types/CartItem.type";
 
 type Props = {
-  shoe: Shoe;
-  addShoeToCart(newShoe: Shoe): void
+  item: CartItem;
+  handleRemoveItemFromCart(selectedItem: CartItem): void;
 };
 
-export default function ShoeComponent(props: Props) {
-  const { shoe, addShoeToCart } = props;
-  const { brand, name, price, isFav } = shoe;
+export default function CartItemComponent(props: Props) {
+  const { item, handleRemoveItemFromCart } = props;
+  const { shoe, quantity } = item;
+  const { brand, name, price } = shoe;
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -26,10 +27,15 @@ export default function ShoeComponent(props: Props) {
         <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
           {price}
         </Typography>
+        <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
+          {quantity}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">fav</Button>
-        <Button size="small" onClick={() => addShoeToCart(shoe)}>Add</Button>
+        <Button size="small" onClick={() => handleRemoveItemFromCart(item)}>
+          Remove
+        </Button>
       </CardActions>
     </Card>
   );
