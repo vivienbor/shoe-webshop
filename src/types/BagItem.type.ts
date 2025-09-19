@@ -1,6 +1,7 @@
 import type { Shoe } from "./Shoe.type";
 
-export type CartItem = {
+export type BagItem = {
   shoe: Shoe;
+  size: number;
   quantity: number;
 };
