@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
 import { useParams } from "react-router";
 import { ShoesContext, type ShoesContextType } from "../contexts/ShoesContext";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, capitalize, Grid, Typography } from "@mui/material";
 import { BagContext, type BagContextType } from "../contexts/BagContext";
+import EdgeDrawer from "../components/EdgeDrawer";
 
 export function ShoePage() {
   const { name } = useParams();
+  const [open, setOpen] = useState(false);
   const { shoes } = useContext(ShoesContext) as ShoesContextType;
   const [selectedSize, setSelectedSize] = useState<number | undefined>();
   const { addShoeToBag } = useContext(BagContext) as BagContextType;
+  const [isAddedToBag, setIsAddedToBag] = useState<boolean>(false);
 
   const clickedShoe = shoes.find((shoe) => shoe.name === name);
 
@@ -25,7 +28,7 @@ export function ShoePage() {
           {clickedShoe.name}
         </Typography>
         <Typography variant="subtitle1" sx={{ color: "gray" }}>
-          {clickedShoe.category}
+          {capitalize(clickedShoe.category)}
         </Typography>
         <Typography variant="h6" sx={{ fontWeight: "semibold" }}>
           € {clickedShoe.price}
@@ -59,20 +62,31 @@ export function ShoePage() {
           sx={{
             backgroundColor: "black",
             color: "white",
-            marginTop: "6px",
+            mt: 2,
             borderRadius: "24px",
           }}
-          onClick={() =>
+          onClick={() => {
             addShoeToBag({
               shoe: clickedShoe,
               size: selectedSize || 0,
               quantity: 1,
-            })
-          }
+            });
+            setIsAddedToBag(true);
+            setOpen(true);
+          }}
         >
           Add to Bag
         </Button>
       </Box>
+      <Box p={3} />
+      {isAddedToBag && selectedSize && (
+        <EdgeDrawer
+          open={open}
+          setOpen={setOpen}
+          shoe={clickedShoe}
+          size={selectedSize}
+        />
+      )}
     </Box>
   );
 }

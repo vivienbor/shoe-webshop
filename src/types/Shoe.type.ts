@@ -1,10 +1,13 @@
+import type { Category } from "../constants/category";
+import type { Gender } from "../constants/gender";
+
 export type Shoe = {
   image: string;
   name: string;
-  category: string;
+  category: Category;
+  gender: Gender;
   price: number;
   sizes: number[];
-  gender: string;
   isFav: boolean;
   specialDescription?: string;
 };

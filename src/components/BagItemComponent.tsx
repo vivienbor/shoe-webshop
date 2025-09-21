@@ -1,7 +1,7 @@
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
 import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Box, Grid, IconButton } from "@mui/material";
+import { Box, capitalize, Grid, IconButton } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -21,55 +21,67 @@ export default function BagItemComponent(props: Props) {
   ) as BagContextType;
 
   return (
-    <Card
-      elevation={0}
+    <Grid
+      size={12}
       sx={{
         borderRadius: 0,
-        marginX: "20px",
-        paddingY: "30px",
-        borderTop: 2,
+        borderTop: 1,
         borderColor: "lightgrey",
       }}
     >
-      <CardContent>
-        <Grid container>
-          <Grid size={5}>
-            <CardMedia
-              component="img"
-              height="90%"
-              image={item.shoe.image}
-              alt={item.shoe.name}
-            />
-          </Grid>
-          <Grid size={7}>
-            <CardContent>
-              <Typography
-                variant="subtitle1"
-                fontWeight={700}
-                fontSize="1.25em"
-              >
+      <Card elevation={0} sx={{ py: 4 }}>
+        <CardContent sx={{ p: 0, pb: 0, "&:last-child": { pb: 0 } }}>
+          <Grid container>
+            <Grid size={5}>
+              <CardMedia
+                component="img"
+                height="150px"
+                width="150px"
+                image={item.shoe.image}
+                alt={item.shoe.name}
+              />
+            </Grid>
+            <Grid size={7} pl={1}>
+              <Typography variant="body2" fontSize="1.1em">
                 € {item.shoe.price}
               </Typography>
               <Typography
-                variant="subtitle1"
-                fontWeight={700}
-                fontSize="1.25em"
+                variant="body2"
+                fontSize="1.1em"
                 gutterBottom
                 component="div"
                 m={0}
               >
                 {item.shoe.name}
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {item.shoe.category}
+              <Typography
+                variant="body2"
+                fontSize="1.1em"
+                sx={{ color: "text.secondary" }}
+              >
+                {capitalize(item.shoe.category)}
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography
+                variant="body2"
+                fontSize="1.1em"
+                sx={{ color: "text.secondary" }}
+              >
                 Size {item.size}
               </Typography>
+            </Grid>
+            <Grid size={12}>
               <Box
-                sx={{ display: "inline-flex", alignItems: "center" }}
                 border={1}
-                borderRadius={5}
+                borderRadius={500}
+                borderColor="lightgrey"
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  width: "100px",
+                  height: "40px",
+                  justifyContent: "space-between",
+                  mt: 2,
+                }}
               >
                 {item.quantity > 1 ? (
                   <IconButton onClick={() => decreaseShoeQuantity(item)}>
@@ -85,10 +97,10 @@ export default function BagItemComponent(props: Props) {
                   <AddTwoToneIcon />
                 </IconButton>
               </Box>
-            </CardContent>
+            </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 }

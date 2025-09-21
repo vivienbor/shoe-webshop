@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import type { Shoe } from "../types/Shoe.type";
 import { useNavigate } from "react-router";
+import { capitalize } from "@mui/material";
 
 type Props = {
   shoe: Shoe;
@@ -19,7 +20,7 @@ export default function ShoeCardComponent(props: Props) {
     <Card
       elevation={0}
       sx={{ height: 300, borderRadius: 0 }}
-      onClick={() => navigate(`/${name}`)}
+      onClick={() => navigate(`/shoe/${name}`)}
     >
       <CardActionArea>
         <CardMedia component="img" height={200} image={image} alt={name} />
@@ -28,7 +29,7 @@ export default function ShoeCardComponent(props: Props) {
             {name}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {category}
+            {capitalize(category)}
           </Typography>
           <Typography variant="subtitle1" fontWeight={700} fontSize="1.25em">
             € {price}
