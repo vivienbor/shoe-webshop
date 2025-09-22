@@ -1,5 +1,4 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import { Badge, Menu, MenuItem } from "@mui/material";
@@ -47,9 +46,6 @@ export default function AppbarComponent() {
             <IconButton>
               <SearchOutlinedIcon sx={{ color: "gray" }} />
             </IconButton>
-            <IconButton>
-              <PersonOutlineOutlinedIcon sx={{ color: "gray" }} />
-            </IconButton>
             <Badge
               badgeContent={calculateTotalQuantity(bag.items)}
               sx={{ color: "gray" }}
@@ -90,6 +86,18 @@ export default function AppbarComponent() {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
               >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Link
+                    style={{
+                      textAlign: "center",
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                    to={"/shoes"}
+                  >
+                    All Shoes
+                  </Link>
+                </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Link
                     style={{

@@ -8,6 +8,7 @@ export type BagContextType = {
   increaseShoeQuantity(clickedItem: BagItem): void;
   decreaseShoeQuantity(clickedItem: BagItem): void;
   removeItem(clickedItem: BagItem): void;
+  emptyBag(): void;
 };
 
 export const BagContext = createContext<BagContextType | undefined>(undefined);
@@ -86,6 +87,10 @@ export function BagContextProvider(props: BagContextProviderProps) {
     setBag({ items: newBagItems, sum: bag.sum - clickedItem.shoe.price });
   }
 
+  function emptyBag() {
+    setBag({ items: [], sum: 0 });
+  }
+
   return (
     <BagContext.Provider
       value={{
@@ -94,6 +99,7 @@ export function BagContextProvider(props: BagContextProviderProps) {
         increaseShoeQuantity,
         decreaseShoeQuantity,
         removeItem,
+        emptyBag,
       }}
     >
       {children}

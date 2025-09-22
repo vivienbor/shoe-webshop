@@ -5,8 +5,6 @@
 // 2) Put this file (e.g. PaymentPage.tsx) in your React app and import it into a route.
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AndroidIcon from "@mui/icons-material/Android";
-import AppleIcon from "@mui/icons-material/Apple";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import LockIcon from "@mui/icons-material/Lock";
@@ -27,8 +25,9 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
+import { BagContext, type BagContextType } from "../contexts/BagContext";
 
 type Card = {
   number: string;
@@ -50,6 +49,7 @@ export default function StripePage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const total = searchParams.get("total");
+  const { emptyBag } = useContext(BagContext) as BagContextType;
 
   function formatCardNumber(value: string) {
     const digits = value.replace(/\D/g, "").slice(0, 16);
@@ -77,6 +77,7 @@ export default function StripePage() {
         2
       )} to card ending ${card.number.slice(-4)}`
     );
+    emptyBag();
   }
 
   const isValid =
@@ -341,34 +342,6 @@ export default function StripePage() {
                       </Box>
                     </Grid>
                   </Grid>
-                </Box>
-
-                <Divider />
-
-                <Box>
-                  <Typography variant="caption" color="text.secondary">
-                    Pay fast
-                  </Typography>
-                  <Stack
-                    direction={{ xs: "column", sm: "row" }}
-                    spacing={1}
-                    sx={{ mt: 1 }}
-                  >
-                    <Button
-                      variant="outlined"
-                      startIcon={<AppleIcon />}
-                      sx={{ textTransform: "none", flex: 1 }}
-                    >
-                      Apple Pay
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      startIcon={<AndroidIcon />}
-                      sx={{ textTransform: "none", flex: 1 }}
-                    >
-                      Google Pay
-                    </Button>
-                  </Stack>
                 </Box>
 
                 <Divider />

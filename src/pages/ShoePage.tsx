@@ -58,8 +58,13 @@ export function ShoePage() {
           })}
         </Grid>
         <Button
+          disabled={!selectedSize}
           fullWidth
           sx={{
+            "&.Mui-disabled": {
+              background: "gray",
+              color: "white",
+            },
             backgroundColor: "black",
             color: "white",
             mt: 2,
