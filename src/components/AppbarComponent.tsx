@@ -1,7 +1,7 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import { Badge, Menu, MenuItem } from "@mui/material";
+import { Badge, Menu, MenuItem, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -24,6 +24,11 @@ export default function AppbarComponent() {
     setAnchorElNav(null);
   };
 
+  const handleMenuItemClick = (path: string) => {
+    navigate(path, { replace: true });
+    handleCloseNavMenu();
+  };
+
   return (
     <Box sx={{ flexGrow: 1, mt: 2 }}>
       <AppBar
@@ -33,14 +38,12 @@ export default function AppbarComponent() {
       >
         <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
-                alt="Nike"
-                style={{ height: 20, marginLeft: 0 }}
-                onClick={() => navigate("/", { replace: true })}
-              />
-            </IconButton>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+              alt="Nike"
+              style={{ height: 20, marginLeft: 0, cursor: "pointer" }}
+              onClick={() => navigate("/", { replace: true })}
+            />
           </Box>
           <Box
             sx={{
@@ -123,6 +126,7 @@ export default function AppbarComponent() {
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
+                sx={{ color: "rgba(0, 0, 0, 0.6)" }}
               >
                 <MenuIcon />
               </IconButton>
@@ -142,53 +146,46 @@ export default function AppbarComponent() {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
               >
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link
+                <MenuItem onClick={() => handleMenuItemClick("/shoes")}>
+                  <Typography
                     style={{
                       textAlign: "center",
-                      textDecoration: "none",
                       color: "black",
                     }}
-                    to={"/shoes"}
                   >
                     All Shoes
-                  </Link>
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link
+                <MenuItem onClick={() => handleMenuItemClick("/shoes/men")}>
+                  <Typography
                     style={{
                       textAlign: "center",
-                      textDecoration: "none",
                       color: "black",
                     }}
-                    to={"/shoes/men"}
                   >
                     Men
-                  </Link>
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link
+                <MenuItem onClick={() => handleMenuItemClick("/shoes/women")}>
+                  <Typography
                     style={{
                       textAlign: "center",
-                      textDecoration: "none",
                       color: "black",
                     }}
-                    to={"/shoes/women"}
                   >
                     Women
-                  </Link>
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link
+                <MenuItem onClick={() => handleMenuItemClick("/shoes/unisex")}>
+                  <Typography
                     style={{
                       textAlign: "center",
-                      textDecoration: "none",
+
                       color: "black",
                     }}
-                    to={"/shoes/unisex"}
                   >
                     Unisex
-                  </Link>
+                  </Typography>
                 </MenuItem>
               </Menu>
             </Box>

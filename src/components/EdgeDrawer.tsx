@@ -80,6 +80,7 @@ export default function EdgeDrawer(props: Props) {
         swipeAreaWidth={drawerBleeding}
         disableSwipeToOpen={false}
         keepMounted
+        sx={{ display: { xs: "block", md: "none" } }}
       >
         <StyledBox
           sx={{
