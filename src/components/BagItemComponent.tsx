@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 import { BagContext, type BagContextType } from "../contexts/BagContext";
 import type { BagItem } from "../types/BagItem.type";
+import { useNavigate } from "react-router";
 
 type Props = {
   item: BagItem;
@@ -19,6 +20,7 @@ export default function BagItemComponent(props: Props) {
   const { increaseShoeQuantity, decreaseShoeQuantity, removeItem } = useContext(
     BagContext
   ) as BagContextType;
+  const navigate = useNavigate();
 
   return (
     <Grid
@@ -26,22 +28,26 @@ export default function BagItemComponent(props: Props) {
       sx={{
         borderRadius: 0,
         borderTop: 1,
-        borderColor: "lightgrey",
+        borderColor: { xs: "lightgrey" },
       }}
     >
       <Card elevation={0} sx={{ py: 4 }}>
         <CardContent sx={{ p: 0, pb: 0, "&:last-child": { pb: 0 } }}>
           <Grid container>
-            <Grid size={5}>
+            <Grid size={{ xs: 5, md: 3 }}>
               <CardMedia
                 component="img"
                 height="150px"
                 width="150px"
                 image={item.shoe.image}
                 alt={item.shoe.name}
+                onClick={() =>
+                  navigate(`/shoe/${item.shoe.name}`, { replace: true })
+                }
+                sx={{ cursor: "pointer" }}
               />
             </Grid>
-            <Grid size={7} pl={1}>
+            <Grid size={{ xs: 7, md: 9 }} pl={1}>
               <Typography variant="body2" fontSize="1.1em">
                 € {item.shoe.price}
               </Typography>

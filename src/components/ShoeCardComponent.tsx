@@ -19,11 +19,16 @@ export default function ShoeCardComponent(props: Props) {
   return (
     <Card
       elevation={0}
-      sx={{ height: 300, borderRadius: 0 }}
+      sx={{ height: { xs: 325, sm: 425 }, borderRadius: 0 }}
       onClick={() => navigate(`/shoe/${name}`)}
     >
       <CardActionArea>
-        <CardMedia component="img" height={200} image={image} alt={name} />
+        <CardMedia
+          component="img"
+          sx={{ height: { xs: 200, sm: 300 } }}
+          image={image}
+          alt={name}
+        />
         <CardContent>
           <Typography gutterBottom component="div" m={0}>
             {name}

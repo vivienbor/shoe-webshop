@@ -42,6 +42,62 @@ export default function AppbarComponent() {
               />
             </IconButton>
           </Box>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              flexDirection: "row",
+              gap: 3,
+            }}
+          >
+            <Link
+              style={{
+                textAlign: "center",
+                textDecoration: "none",
+                color: "black",
+
+                fontSize: "1.2em",
+              }}
+              to={"/shoes"}
+            >
+              All Shoes
+            </Link>
+            <Link
+              style={{
+                textAlign: "center",
+                textDecoration: "none",
+                color: "black",
+
+                fontSize: "1.2em",
+              }}
+              to={"/shoes/men"}
+            >
+              Men
+            </Link>
+            <Link
+              style={{
+                textAlign: "center",
+                textDecoration: "none",
+                color: "black",
+
+                fontSize: "1.2em",
+              }}
+              to={"/shoes/women"}
+            >
+              Women
+            </Link>
+            <Link
+              style={{
+                textAlign: "center",
+                textDecoration: "none",
+                color: "black",
+
+                fontSize: "1.2em",
+              }}
+              to={"/shoes/unisex"}
+            >
+              Unisex
+            </Link>
+          </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <IconButton>
               <SearchOutlinedIcon sx={{ color: "gray" }} />

@@ -22,20 +22,28 @@ export function ShoePage() {
   if (!clickedShoe) return <></>;
 
   return (
-    <Box>
-      <Box sx={{ mx: 2, mb: "12px" }}>
-        <Typography variant="h6" sx={{ fontWeight: "semibold" }}>
-          {clickedShoe.name}
-        </Typography>
-        <Typography variant="subtitle1" sx={{ color: "gray" }}>
-          {capitalize(clickedShoe.category)}
-        </Typography>
-        <Typography variant="h6" sx={{ fontWeight: "semibold" }}>
-          € {clickedShoe.price}
-        </Typography>
-      </Box>
-      <img src={clickedShoe.image} width="100%" />
-      <Box sx={{ mx: 2, mt: "12px" }}>
+    <Grid
+      container
+      sx={{ alignItems: "center", maxWidth: "1228px", margin: "0 auto" }}
+    >
+      <Grid size={{ xs: 12, md: 6 }}>
+        <Box sx={{ mx: { xs: 2, md: 0 }, mb: "12px" }}>
+          <Typography variant="h6" sx={{ fontWeight: "semibold" }}>
+            {clickedShoe.name}
+          </Typography>
+          <Typography variant="subtitle1" sx={{ color: "gray" }}>
+            {capitalize(clickedShoe.category)}
+          </Typography>
+          <Typography variant="h6" sx={{ fontWeight: "semibold" }}>
+            € {clickedShoe.price}
+          </Typography>
+          <img src={clickedShoe.image} width="100%" />
+        </Box>
+      </Grid>
+      <Grid
+        sx={{ mx: { xs: 2, md: 0 }, p: { xs: 0, md: 2 }, mt: "12px" }}
+        size={{ xs: 12, md: 6 }}
+      >
         <Typography variant="subtitle1">Select Size</Typography>
         <Grid container spacing={1} mt={1}>
           {clickedShoe?.sizes.map((size) => {
@@ -82,7 +90,7 @@ export function ShoePage() {
         >
           Add to Bag
         </Button>
-      </Box>
+      </Grid>
       <Box p={3} />
       {isAddedToBag && selectedSize && (
         <EdgeDrawer
@@ -92,6 +100,6 @@ export function ShoePage() {
           size={selectedSize}
         />
       )}
-    </Box>
+    </Grid>
   );
 }

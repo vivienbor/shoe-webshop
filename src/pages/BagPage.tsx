@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Grid,
   LinearProgress,
   Stack,
@@ -23,7 +24,7 @@ export function BagPage() {
   };
 
   return (
-    <Box p={2} mt={3}>
+    <Box p={2} mt={3} maxWidth="1028px" margin="0 auto">
       <Stack direction="column" alignItems="center" p={2}>
         <Typography variant="h5">Bag</Typography>
         <Stack direction="row" alignItems="center">
@@ -37,17 +38,25 @@ export function BagPage() {
         </Stack>
       </Stack>
       <Grid container>
-        {bag.items.map((item) => (
-          <BagItemComponent
-            item={item}
-            key={`${item.shoe.name}-${item.size}`}
-          />
-        ))}
+        <Grid container size={{ xs: 12, md: 9 }} sx={{ pr: { md: 3 } }}>
+          {bag.items.map((item) => (
+            <BagItemComponent
+              item={item}
+              key={`${item.shoe.name}-${item.size}`}
+            />
+          ))}
+        </Grid>
         {bag.sum > 0 && (
           <Grid
-            size={12}
+            size={{ xs: 12, md: 3 }}
             container
-            sx={{ borderTop: 1, borderColor: "lightgrey", pt: 2 }}
+            sx={{
+              borderTop: { xs: 1, md: 0 },
+              borderColor: "lightgrey",
+              pt: 2,
+              px: 2,
+              maxHeight: "310px",
+            }}
           >
             <Grid size={12}>
               <Typography variant="h5">Summary</Typography>
@@ -105,6 +114,9 @@ export function BagPage() {
                   alignItems: "center",
                   justifyContent: "space-between",
                   mt: 1,
+                  borderTop: 1,
+                  borderColor: "lightgrey",
+                  pt: 1,
                 }}
               >
                 <Typography variant="body2" fontWeight={700}>
@@ -115,11 +127,42 @@ export function BagPage() {
                 </Typography>
               </Box>
             </Grid>
+            <Grid
+              size={{ xs: 12 }}
+              maxWidth="350px"
+              sx={{ margin: "0 auto", display: { xs: "none", md: "block" } }}
+            >
+              <Button
+                sx={{
+                  "&.Mui-disabled": {
+                    background: "gray",
+                    color: "white",
+                  },
+                  backgroundColor: "black",
+                  color: "white",
+                  marginTop: "6px",
+                  borderRadius: "500px",
+                  height: "55px",
+                  mt: 3,
+                }}
+                fullWidth
+                disabled={bag.items.length === 0}
+                onClick={() => navigate(`/payment?total=${bag.sum}`)}
+              >
+                Checkout
+              </Button>
+            </Grid>
           </Grid>
         )}
         <Grid
           size={12}
-          sx={{ borderTop: 1, borderColor: "lightgrey", pt: 2, mt: 2 }}
+          sx={{
+            borderTop: 1,
+            borderColor: "lightgrey",
+            pt: 2,
+            mt: 2,
+            display: { xs: "block", md: "none" },
+          }}
         >
           <Box sx={{ pl: 1, mt: 3 }}>
             <Typography variant="caption">
@@ -127,7 +170,12 @@ export function BagPage() {
                 ? `You qualify for Free Shipping!`
                 : `Add €${50.0 - bag.sum} more to qualify for Free Shipping.`}
             </Typography>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <Box sx={{ width: "100%", mr: 1 }}>
                 <LinearProgress
                   variant="determinate"
@@ -144,7 +192,11 @@ export function BagPage() {
             </Box>
           </Box>
         </Grid>
-        <Grid size={12}>
+        <Grid
+          size={{ xs: 12 }}
+          maxWidth="350px"
+          sx={{ margin: "0 auto", display: { xs: "block", md: "none" } }}
+        >
           <Button
             sx={{
               "&.Mui-disabled": {
@@ -162,7 +214,7 @@ export function BagPage() {
             disabled={bag.items.length === 0}
             onClick={() => navigate(`/payment?total=${bag.sum}`)}
           >
-            Go to Checkout
+            Checkout
           </Button>
         </Grid>
       </Grid>

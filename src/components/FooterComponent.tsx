@@ -7,7 +7,7 @@ export function FooterComponent() {
 
   return (
     <Box component="footer" p={2} pt={4}>
-      <Box>
+      <Box maxWidth="750px" sx={{ margin: "0 auto" }}>
         <Box textAlign="center" py={2}>
           <IconButton>
             <img
@@ -54,7 +54,7 @@ export function FooterComponent() {
         </Box>
         <Box
           sx={{
-            borderTop: 1,
+            borderTop: { xs: 1, md: 0 },
             borderColor: "lightgrey",
             display: "flex",
             flexDirection: "row",
